@@ -21,7 +21,7 @@
 }
 .drop-down-list { 
 
-  display: flex;
+  display: list-item;
   flex-direction: column;
   width:40%;
   margin-top: 10px;
@@ -32,8 +32,7 @@
   width: 200px;  
 }
 .list-components {  
-  /*//position:absolute*/;
-  display: inherit;
+  display: list-item;
   height: inherit;
   margin: 3px 35px;
   font-weight: normal;
