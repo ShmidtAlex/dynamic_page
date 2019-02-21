@@ -1,5 +1,50 @@
 .container {
-  background-color: lightgreen;
-  height: 100px;
-  width: 100px;
+  display: flex;
+  background-color: lightgray;
+  height: 100vh;
+}
+
+.rightSidebar {  
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  background-color: whitesmoke;
+  height: 100%;
+  width: 20%;
+  /*border: 1px solid red;*/
+}
+
+.mainSection {
+  height: 100vh;
+  width: 80%;
+}
+.drop-down-list { 
+
+  display: flex;
+  flex-direction: column;
+  width:40%;
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: left;
+  list-style-type: disc; 
+  position: relative;
+  width: 200px;  
+}
+.list-components {  
+  /*//position:absolute*/;
+  display: inherit;
+  height: inherit;
+  margin: 3px 35px;
+  font-weight: normal;
+  text-align: left;
+  list-style-type: circle;
+}
+h1 {
+  margin: 30px 0 0  100px;
+}
+ul {
+  margin-top:30px;
+  width: auto;
+  height: 200px;
 }
