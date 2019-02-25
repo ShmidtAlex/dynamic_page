@@ -19,11 +19,10 @@
   height: 100vh;
   width: 80%;
 }
-.drop-down-list { 
+.dropDownList { 
 
   display: list-item;
   flex-direction: column;
-  width:40%;
   margin-top: 10px;
   font-weight: bold;
   text-align: left;
@@ -31,7 +30,7 @@
   position: relative;
   width: 200px;  
 }
-.list-components {  
+.listComponents {  
   display: list-item;
   height: inherit;
   margin: 3px 35px;
