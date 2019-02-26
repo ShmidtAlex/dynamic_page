@@ -9,15 +9,14 @@ const rightSidebar = document.createElement('div');
 const mainSection = document.createElement('div');
 const mainSectionHeader = document.createElement('h1');
 mainSection.appendChild(mainSectionHeader);
-const titleMainSec = document.createTextNode('React');
-mainSectionHeader.appendChild(titleMainSec);
+mainSectionHeader.textContent = 'React';
 const mainList = document.createElement('ul');
 
 containerBlock.appendChild(rightSidebar);
 containerBlock.appendChild(mainSection);
 rightSidebar.appendChild(mainList);
-rightSidebar.setAttribute('class', 'rightSidebar');
-mainSection.setAttribute('class', 'mainSection');
+rightSidebar.classList.add('rightSidebar');
+mainSection.classList.add('mainSection');
 
 function bulidMenu(element, items) {
     let newElement;
@@ -31,8 +30,7 @@ function bulidMenu(element, items) {
                 newElement = document.createElement(tagName);
                 element.appendChild(newElement);
                 newElement.setAttribute('class', `${subItem} listComponents`);
-                let text = document.createTextNode(subItem);
-                newElement.appendChild(text);
+                newElement.textContent = subItem;
             } else {
                 bulidMenu(newElement, item[key]);
                 if (newElement.children) {
@@ -47,26 +45,37 @@ function bulidMenu(element, items) {
 bulidMenu(mainList, items);
 
 
-function expandList(e) { 
-    let element = e.target.children;
+function expandList(e) {
     let otherElements = document.querySelectorAll('.listComponents');
-    otherElements.forEach(function(elem){      
-      if(elem.parentNode !== e.target){
-        elem.style.display = 'none';
-      }
-    })
-    for (let i = 0; i < element.length; i++) {
-      let elemStyles = window.getComputedStyle(element[i]).getPropertyValue('display');
-        if (elemStyles !== 'none') {
-           element[i].style.display = 'none';
-        } else {
-          element[i].style.display = 'inherit';
+    otherElements.forEach(function(list) {
+        if (list.parentNode !== e.target) {
+            list.style.display = 'none';
         }
-        
+    })
+    let element = e.target.children;
+    for (let i = 0; i < element.length; i++) {
+        let elemStyles = window.getComputedStyle(element[i]).getPropertyValue('display');
+        if (elemStyles !== 'none') {
+            element[i].style.display = 'none';
+        } else {
+            element[i].style.display = 'inherit';
+        }
     }
 }
 
+const listElements = document.querySelectorAll('.listComponents')
+
+//for preventing of call parent element function expandList, added e.stopPropagation() to child element;
+function relflectListName(e) {
+    e.stopPropagation();
+    listElements.forEach(function(elem) {
+        if (e.target.parentNode === elem.parentNode) {
+            mainSectionHeader.textContent = e.target.textContent;
+        }
+    })
+}
 
 const expandedLists = document.querySelectorAll('.dropDownList');
 
 expandedLists.forEach(list => list.addEventListener('click', expandList));
+listElements.forEach(elem => elem.addEventListener('click', relflectListName));
