@@ -20,9 +20,12 @@ mainSection.classList.add('mainSection');
 
 function bulidMenu(element, items) {
     let newElement;
+
     Object.keys(items).forEach(function(key) {
         let item = items[key];
+        //console.log(item)
         Object.keys(item).forEach(function(key) {
+          console.log(item[key])
             let subItem;
             let tagName = 'li';
             if (!Array.isArray(item[key])) {
