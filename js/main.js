@@ -20,30 +20,22 @@ mainSection.classList.add('mainSection');
 
 function bulidMenu(element, items) {
     let newElement;
-
-    Object.keys(items).forEach(function(key) {
-        let item = items[key];
-        //console.log(item)
-        Object.keys(item).forEach(function(key) {
-          console.log(item[key])
-            let subItem;
-            let tagName = 'li';
-            if (!Array.isArray(item[key])) {
-                subItem = item[key];
-                newElement = document.createElement(tagName);
-                element.appendChild(newElement);
-                newElement.setAttribute('class', `${subItem} listComponents`);
-                newElement.textContent = subItem;
-            } else {
-                bulidMenu(newElement, item[key]);
-                if (newElement.children) {
-                    newElement.classList.add('dropDownList');
-                    newElement.classList.remove('listComponents');
-                }
+    let tagName = 'li';
+    items.forEach(function(item) {
+        let itemClassName;
+        itemClassName = 'dropDownList';
+        newElement = document.createElement(tagName);
+        element.appendChild(newElement);
+        newElement.setAttribute('class', `${item.name} ${itemClassName}`);
+        newElement.textContent = item.name;
+        if (Array.isArray(item.items)) {
+            bulidMenu(newElement, item.items);
+            for (let i = 0; i < newElement.children.length; i++) {
+                newElement.children[i].classList.remove('dropDownList');
+                newElement.children[i].classList.add('listComponents');
             }
-        })
-    });
-
+        }
+    })
 }
 bulidMenu(mainList, items);
 
@@ -61,7 +53,7 @@ function expandList(e) {
         if (elemStyles !== 'none') {
             element[i].style.display = 'none';
         } else {
-            element[i].style.display = 'inherit';
+            element[i].style.display = 'block';
         }
     }
 }
