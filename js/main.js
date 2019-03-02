@@ -23,7 +23,8 @@ function bulidMenu(element, items) {
     items.forEach(item => {
         const newElement = document.createElement(tagName);
         element.appendChild(newElement);
-        newElement.setAttribute('class', `${item.name} dropDownList`);
+        const classes = [item.name, 'dropDownList'];
+        newElement.classList.add(...classes);
         newElement.textContent = item.name;
 
         item.items.forEach(subItem => {
