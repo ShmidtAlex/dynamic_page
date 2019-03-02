@@ -20,21 +20,22 @@ mainSection.classList.add('mainSection');
 
 function bulidMenu(element, items) {
     let newElement;
+    let itemClassName;
     let tagName = 'li';
     items.forEach(function(item) {
-        let itemClassName;
         itemClassName = 'dropDownList';
         newElement = document.createElement(tagName);
         element.appendChild(newElement);
         newElement.setAttribute('class', `${item.name} ${itemClassName}`);
         newElement.textContent = item.name;
-        if (Array.isArray(item.items)) {
-            bulidMenu(newElement, item.items);
-            for (let i = 0; i < newElement.children.length; i++) {
-                newElement.children[i].classList.remove('dropDownList');
-                newElement.children[i].classList.add('listComponents');
-            }
-        }
+
+        item.items.forEach(function(subItem) {
+            itemClassName = 'listComponents';
+            newSubElement = document.createElement(tagName);
+            newElement.appendChild(newSubElement);
+            newSubElement.setAttribute('class', `${subItem.name} ${itemClassName}`);
+            newSubElement.textContent = subItem.name;
+        })
     })
 }
 bulidMenu(mainList, items);
