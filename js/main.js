@@ -19,21 +19,18 @@ rightSidebar.classList.add('rightSidebar');
 mainSection.classList.add('mainSection');
 
 function bulidMenu(element, items) {
-    let newElement;
-    let itemClassName;
     let tagName = 'li';
-    items.forEach(function(item) {
-        itemClassName = 'dropDownList';
-        newElement = document.createElement(tagName);
+    items.forEach(item => {
+        const newElement = document.createElement(tagName);
         element.appendChild(newElement);
-        newElement.setAttribute('class', `${item.name} ${itemClassName}`);
+        newElement.setAttribute('class', `${item.name} dropDownList`);
         newElement.textContent = item.name;
 
-        item.items.forEach(function(subItem) {
-            itemClassName = 'listComponents';
-            newSubElement = document.createElement(tagName);
+        item.items.forEach(subItem => {
+            const newSubElement = document.createElement(tagName);
             newElement.appendChild(newSubElement);
-            newSubElement.setAttribute('class', `${subItem.name} ${itemClassName}`);
+            const classes = [subItem.name, 'listComponents'];
+            newSubElement.classList.add(...classes);
             newSubElement.textContent = subItem.name;
         })
     })
@@ -42,21 +39,21 @@ bulidMenu(mainList, items);
 
 
 function expandList(e) {
-    let otherElements = document.querySelectorAll('.listComponents');
+    const otherElements = document.querySelectorAll('.listComponents');
     otherElements.forEach(function(list) {
         if (list.parentNode !== e.target) {
             list.style.display = 'none';
         }
     })
-    let element = e.target.children;
-    for (let i = 0; i < element.length; i++) {
-        let elemStyles = window.getComputedStyle(element[i]).getPropertyValue('display');
+    const elements = Array.from(e.target.children);
+    elements.forEach(element => {
+        const elemStyles = window.getComputedStyle(element).getPropertyValue('display');
         if (elemStyles !== 'none') {
-            element[i].style.display = 'none';
+            element.style.display = 'none';
         } else {
-            element[i].style.display = 'block';
+            element.style.display = 'block';
         }
-    }
+    })
 }
 
 const listElements = document.querySelectorAll('.listComponents')
@@ -64,7 +61,7 @@ const listElements = document.querySelectorAll('.listComponents')
 //for preventing of call parent element function expandList, added e.stopPropagation() to child element;
 function relflectListName(e) {
     e.stopPropagation();
-    listElements.forEach(function(elem) {
+    listElements.forEach(elem => {
         if (e.target.parentNode === elem.parentNode) {
             mainSectionHeader.textContent = e.target.textContent;
         }
