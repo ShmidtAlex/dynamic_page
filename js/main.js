@@ -40,7 +40,7 @@ bulidMenu(mainList, items);
 
 function expandList(e) {
     const otherElements = document.querySelectorAll('.listComponents');
-    otherElements.forEach(function(list) {
+    otherElements.forEach(list => {
         if (list.parentNode !== e.target) {
             list.style.display = 'none';
         }
