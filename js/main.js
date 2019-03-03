@@ -23,15 +23,13 @@ function bulidMenu(element, items) {
     items.forEach(item => {
         const newElement = document.createElement(tagName);
         element.appendChild(newElement);
-        const classes = [item.name, 'dropDownList'];
-        newElement.classList.add(...classes);
+        newElement.classList.add('dropDownList');
         newElement.textContent = item.name;
 
         item.items.forEach(subItem => {
             const newSubElement = document.createElement(tagName);
             newElement.appendChild(newSubElement);
-            const classes = [subItem.name, 'listComponents'];
-            newSubElement.classList.add(...classes);
+            newSubElement.classList.add('listComponents');
             newSubElement.textContent = subItem.name;
         })
     })
